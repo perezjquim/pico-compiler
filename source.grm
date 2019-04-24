@@ -1,0 +1,8 @@
+"Name"     = 'Compilador PICO'  
+"Author"   = 'Joaquim Perez;@@@;@@@'
+"Version"  = '1.0'
+"About"    = 'Compilador para a linguagem PICO'
+
+"Start Symbol" = <empty>
+               
+<empty> ::= 
