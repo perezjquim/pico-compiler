@@ -1,8 +1,74 @@
+!!!!!!!!!!!
 "Name"     = 'Compilador PICO'  
 "Author"   = 'Joaquim Perez;@@@;@@@'
 "Version"  = '1.0'
 "About"    = 'Compilador para a linguagem PICO'
+"Start Symbol" = <empty>  
+!!!!!!!!!!!
 
-"Start Symbol" = <empty>
-               
-<empty> ::= 
+!!!!!!!!!!!               
+Letter = {Letter}
+Digit = {Digit}             
+!!!!!!!!!!!
+        
+!!!!!!!!!!! 
+<empty>              ::=  
+<literal>            ::= '(' | ')' | '+' | '-' | ';' | '||' | ':' | ':='
+<letter>             ::= Letter
+<digit>              ::= Digit                    
+<id-char>            ::= <letter> | <digit>   
+                                         
+! wip                      
+<id-chars>           ::= <empty>
+!<id-chars>           ::= ( <id-char> <id:chars> ) | <empty>                   
+! wip
+
+<id>                 ::= <letter> <id-chars>
+<natural-constant>   ::= <digit> <digits>
+<digits>             ::= <digit> <digits> | <empty>
+<quote>              ::= '"'
+                      
+! wip
+<newline>            ::= <empty>
+<tab>                ::= <empty>                      
+! wip
+
+<layout>             ::= ' ' | <newline> | <tab>                                            
+<any-char-but-quote> ::= <letter> | <digit> | <literal> | <layout>                      
+<string-tail>        ::= <any-char-but-quote> <string-tail> | <quote>                      
+<string-constant>    ::= <quote> <string-tail>         
+                                  
+! wip
+<id-type-list>       ::= <empty>
+!<id-type-list>       ::= ( <id> ':' <type> ( <empty> | ',' <id-type-list> ) )
+! wip
+
+<decls>              ::= 'declare' <id-type-list> ';'
+<type>               ::= 'natural' | 'string'
+                      
+! wip
+!<series>             ::= <empty> | <stat> ( <empty> | ';' <series> )
+<series>             ::= <empty>
+! wip
+
+<stat>               ::= <assign> | <if> | <while>
+<assign>             ::= <id> ':=' <exp>
+<if>                 ::= 'if' <exp> 'then' <series> 'else' <series> 'fi'
+<while>              ::= 'while' <exp> 'do' <series> 'od'
+<exp>                ::= <primary> | <plus> | <minus> | <conc>
+<primary>            ::= <id> | <natural-constant> | <string-constant> | '(' <exp> ')'
+<plus>               ::= <exp> '+' <primary>
+<minus>              ::= <exp> '-' <primary>
+<conc>               ::= <exp> '||' <primary>                      
+<lexical-stream>     ::= <lexical-item> <lexical-stream> | <lexical-item>
+                      
+! wip
+!<lexical-item>       ::= <optional-layout> ( <keyword-or-id> | <natural-constant> | <string-constant> | <literal> )
+<lexical-item>       ::= <empty>
+! wip
+
+<optional-layout>    ::= <layout> | <empty>
+<keyword-or-id>      ::= 'begin' | 'end' | 'declare' | 'natural' | 'string' | 'if' | 'then' | 'else' | 'fi' | 'while' | 'do' | 'od' | <id>
+<pico-program>       ::= 'begin' <decls> <series> 'end'
+                      
+!!!!!!!!!!
