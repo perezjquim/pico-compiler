@@ -14,10 +14,11 @@
 _NewLine             = {CR}{LF}+[_] | {LF}+[_]
 _Tab                 = {HT}+[_]
 _Space               = {Space}+[_]
-{IdHead}             = {Letter} + [_]
+{IdHead}             = {Letter}
 {IdTail}             = {IdHead} + {Digit}
 _Id                  = {IdHead}{IdTail}*
-_Digits              = [123456789]{digit}*            
+_Digits              = [123456789]{digit}*
+_Quote               = ["]            
 !!!!!!!!!!!
         
 !!!!!!!!!!!
@@ -27,13 +28,13 @@ _Digits              = [123456789]{digit}*
 <newline>            ::= _NewLine
 <tab>                ::= _Tab
 <space>              ::= _Space
+<quote>              ::= _Quote                      
 <empty>              ::= <>
 !!!!!!!!!!!                      
    
 !!!!!!!!!!!
 <literal>            ::= '(' | ')' | '+' | '-' | ';' | '||' | ':' | ':='               
-<natural-constant>   ::= <digits>
-<quote>              ::= '"'                     
+<natural-constant>   ::= <digits>                
 <layout>             ::= <space> | <newline> | <tab>                                            
 <any-char-but-quote> ::= <letter> | <digits> | <literal> | <layout>                      
 <string-tail>        ::= <any-char-but-quote> <string-tail> | <quote>                      
@@ -42,9 +43,12 @@ _Digits              = [123456789]{digit}*
 <decls>              ::= 'declare' <id-type-list> ';'
 <type>               ::= 'natural' | 'string'              
 <series>             ::= <empty> | <stat> | <stat> ';' <series>
-<stat>               ::= <assign> | <if> | <while>
+<stat>               ::= <assign> | <if> | <while> | <for>
 <assign>             ::= <id> ':=' <exp>
-<if>                 ::= 'if' <exp> 'then' <series> 'else' <series> 'fi'
+<if>                 ::= <if-compact> 'fi' | <if-compact> 'else' <series> 'fi'
+<if-compact>         ::= 'if' <exp> 'then' <series>                                            
+<for-head>           ::= <assign> ';' <exp> ';' <assign>
+<for>                ::= 'for' <for-head> 'do' <series> 'od'                       
 <while>              ::= 'while' <exp> 'do' <series> 'od'
 <exp>                ::= <primary> | <plus> | <minus> | <conc>
 <primary>            ::= <id> | <natural-constant> | <string-constant> | '(' <exp> ')'

@@ -13,11 +13,18 @@ begin declare input : natural,
           od;
           input := input - 1
       od;
+      if y then
+        z := z + 1;              
+      fi;
       if x then 
         x := x + 1;
       else
         x := x - 1;
       fi;
+      for w := 1 ; input ; w := w - 1 do
+          rep := output;
+          repnr := input;
+      od;
       while input - 1 do
           rep := output;
           repnr := input;
