@@ -1,47 +1,57 @@
-﻿!!!!!!!!!!!
+!!!!!!!!!!!
 "Name"     = 'Compilador PICO'  
 "Author"   = 'Joaquim Perez;@@@;@@@'
 "Version"  = '1.0'
 "About"    = 'Compilador para a linguagem PICO'
-"Start Symbol" = <pico-program>  
+"Start Symbol" = <pico-program>
+!"Case Sensitive" = True  
+!Comment Start = '/*'
+!Comment End   = '*/'
+!Comment Line  = '//'                 
 !!!!!!!!!!!
 
-!!!!!!!!!!!               
-Letter = {Letter}
-Digit = {Digit} 
-NewLine = {CR}{LF}|{CR} 
-Tab = {HT}                         
+!!!!!!!!!!!             
+!_Letter     = {Letter}+[_]
+!_Digit     = {Digit}+[_]
+_NewLine   = {CR}{LF}+[_] | {LF}+[_]
+_Tab       = {HT}+[_]
+_Space     = {Space}+[_]
+{IdHead}   = {Letter} + [_]
+{IdTail}   = {IdHead} + {Digit}
+_Id         = {IdHead}{IdTail}*
+_Digits       = [123456789]{digit}*            
 !!!!!!!!!!!
         
-!!!!!!!!!!! 
-<letter>             ::= Letter
-<digit>              ::= Digit     
-<newline>            ::= NewLine
-<tab>                ::= Tab
+!!!!!!!!!!!
+<id>                 ::= _Id 
+<letter>             ::= _Letter
+<digits>              ::= _Digits
+<newline>            ::= _NewLine
+<tab>                ::= _Tab
+<space>              ::= _Space
+<empty>              ::= <>
 !!!!!!!!!!!                      
    
 !!!!!!!!!!!
-<empty>              ::=  
 <literal>            ::= '(' | ')' | '+' | '-' | ';' | '||' | ':' | ':='               
-<id-char>            ::= <letter> | <digit>   
-<id-chars>           ::= <id-char> <id-chars> | <empty>                   
-<id>                 ::= <letter> <id-chars>
-<natural-constant>   ::= <digit> <digits>
-<digits>             ::= <digit> <digits> | <empty>
+!<id-char>            ::= <letter> | <digit>   
+!<id-chars>           ::= <id-char> <id-chars> | <empty>                   
+
+
+!<id>                 ::= <letter> <id-chars>
+<natural-constant>   ::= <digits>
+!<digits>             ::= <digit> <digits> | <empty>
 <quote>              ::= '"'                     
-<layout>             ::= ' ' | <newline> | <tab>                                            
-<any-char-but-quote> ::= <letter> | <digit> | <literal> | <layout>                      
+<layout>             ::= <space> | <newline> | <tab>                                            
+<any-char-but-quote> ::= <letter> | <digits> | <literal> | <layout>                      
 <string-tail>        ::= <any-char-but-quote> <string-tail> | <quote>                      
 <string-constant>    ::= <quote> <string-tail>                                                       
-<id-type-list-templ> ::= <id> ':' <type> ! este template é usado no <id-type-list> para evitar repetir "código"  
-<id-type-list>       ::= <id-type-list-templ> <empty> | <id-type-list-templ> ',' <id-type-list>                      
+<id-type-list>       ::= <id> ':' <type> | <id> ':' <type> ',' <id-type-list>
 <decls>              ::= 'declare' <id-type-list> ';'
 <type>               ::= 'natural' | 'string'              
-<series-stat-empty>  ::= <stat> <empty> ! este template é usado no <series> para evitar repetir "código"
-<series-stat-n-empty>::= <stat> ';' <series> ! este template é usado no <series> para evitar repetir "código"                      
-<series>             ::= <empty> | <series-stat-empty> | <series-stat-n-empty>
+<series>             ::= <empty> | <stat> <empty> | <stat> ';' <series>
 <stat>               ::= <assign> | <if> | <while>
-<assign>             ::= <id> ':=' <exp>
+<assign>             ::= <id> ':=' <exp> ';'
 <if>                 ::= 'if' <exp> 'then' <series> 'else' <series> 'fi'
 <while>              ::= 'while' <exp> 'do' <series> 'od'
 <exp>                ::= <primary> | <plus> | <minus> | <conc>
@@ -49,14 +59,5 @@ Tab = {HT}
 <plus>               ::= <exp> '+' <primary>
 <minus>              ::= <exp> '-' <primary>
 <conc>               ::= <exp> '||' <primary>                      
-
-! estes aparentemente não são usados, wip
-<lexical-stream>     ::= <lexical-item> <lexical-stream> | <lexical-item>                    
-<lexical-item>       ::= <optional-layout> <keyword-or-id> | <optional-layout> <natural-constant> | <optional-layout> <string-constant> | <optional-layout> <literal>
-<optional-layout>    ::= <layout> | <empty>
-<keyword-or-id>      ::= 'begin' | 'end' | 'declare' | 'natural' | 'string' | 'if' | 'then' | 'else' | 'fi' | 'while' | 'do' | 'od' | <id>
-! estes aparentemente não são usados, wip
-                      
-<pico-program>       ::= 'begin' <decls> <series> 'end'      
-                               
+<pico-program>       ::= 'begin' <decls> <series> 'end'                                     
 !!!!!!!!!!
