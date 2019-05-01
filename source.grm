@@ -11,21 +11,19 @@
 !!!!!!!!!!!
 
 !!!!!!!!!!!             
-!_Letter     = {Letter}+[_]
-!_Digit     = {Digit}+[_]
-_NewLine   = {CR}{LF}+[_] | {LF}+[_]
-_Tab       = {HT}+[_]
-_Space     = {Space}+[_]
-{IdHead}   = {Letter} + [_]
-{IdTail}   = {IdHead} + {Digit}
-_Id         = {IdHead}{IdTail}*
-_Digits       = [123456789]{digit}*            
+_NewLine             = {CR}{LF}+[_] | {LF}+[_]
+_Tab                 = {HT}+[_]
+_Space               = {Space}+[_]
+{IdHead}             = {Letter} + [_]
+{IdTail}             = {IdHead} + {Digit}
+_Id                  = {IdHead}{IdTail}*
+_Digits              = [123456789]{digit}*            
 !!!!!!!!!!!
         
 !!!!!!!!!!!
 <id>                 ::= _Id 
 <letter>             ::= _Letter
-<digits>              ::= _Digits
+<digits>             ::= _Digits
 <newline>            ::= _NewLine
 <tab>                ::= _Tab
 <space>              ::= _Space
@@ -34,13 +32,7 @@ _Digits       = [123456789]{digit}*
    
 !!!!!!!!!!!
 <literal>            ::= '(' | ')' | '+' | '-' | ';' | '||' | ':' | ':='               
-!<id-char>            ::= <letter> | <digit>   
-!<id-chars>           ::= <id-char> <id-chars> | <empty>                   
-
-
-!<id>                 ::= <letter> <id-chars>
 <natural-constant>   ::= <digits>
-!<digits>             ::= <digit> <digits> | <empty>
 <quote>              ::= '"'                     
 <layout>             ::= <space> | <newline> | <tab>                                            
 <any-char-but-quote> ::= <letter> | <digits> | <literal> | <layout>                      
@@ -49,9 +41,9 @@ _Digits       = [123456789]{digit}*
 <id-type-list>       ::= <id> ':' <type> | <id> ':' <type> ',' <id-type-list>
 <decls>              ::= 'declare' <id-type-list> ';'
 <type>               ::= 'natural' | 'string'              
-<series>             ::= <empty> | <stat> <empty> | <stat> ';' <series>
+<series>             ::= <empty> | <stat> | <stat> ';' <series>
 <stat>               ::= <assign> | <if> | <while>
-<assign>             ::= <id> ':=' <exp> ';'
+<assign>             ::= <id> ':=' <exp>
 <if>                 ::= 'if' <exp> 'then' <series> 'else' <series> 'fi'
 <while>              ::= 'while' <exp> 'do' <series> 'od'
 <exp>                ::= <primary> | <plus> | <minus> | <conc>
