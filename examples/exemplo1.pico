@@ -21,7 +21,7 @@ begin declare input : natural,
       else
         x := x - 1;
       fi;
-      for w := 1 ; input ; w := w - 1 do
+      for w := 1 ; input - 1 ; w := w - 1 do
           rep := output;
           repnr := input;
       od;

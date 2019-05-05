@@ -7,10 +7,14 @@
 !!!!!!!!!!!
 
 !!!!!!!!!!!
-! SÍMBOLOS TERMINAIS             
+! SÍMBOLOS TERMINAIS
+             
+! para estes terminais, está a ser usado o [_]
+! (isto é um simples workaround, vai ser preciso resolver isto)
 _NewLine             = {CR}{LF}+[_] | {LF}+[_]
 _Tab                 = {HT}+[_]
 _Space               = {Space}+[_]
+                     
 {IdHead}             = {Letter}
 {IdTail}             = {IdHead} + {Digit}
 _Id                  = {IdHead}{IdTail}*
@@ -62,10 +66,20 @@ _Quote               = ["]
 !!!!!!!!!!!
 ! IF E CICLOS                      
 <if>                 ::= <if-compact> 'fi' | <if-compact> 'else' <series> 'fi'
-<if-compact>         ::= 'if' <exp> 'then' <series>                                            
-<for-head>           ::= <assign> ';' <exp> ';' <assign>
-<for>                ::= 'for' <for-head> 'do' <series> 'od'                       
+<if-compact>         ::= 'if' <exp> 'then' <series>                   
+
+! notação:
+!   while _ do
+!       (...)
+!   od
 <while>              ::= 'while' <exp> 'do' <series> 'od'
+                      
+! notação para o for
+!   for _ ; _ ; do
+!       (...)
+!   od                                                                 
+<for-head>           ::= <assign> ';' <exp> ';' <assign>
+<for>                ::= 'for' <for-head> 'do' <series> 'od'    
 !!!!!!!!!!!
 
 !!!!!!!!!!!                                            
