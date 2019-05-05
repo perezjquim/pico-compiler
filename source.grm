@@ -1,16 +1,13 @@
-!!!!!!!!!!!
+﻿!!!!!!!!!!!
 "Name"     = 'Compilador PICO'  
-"Author"   = 'Joaquim Perez;@@@;@@@'
+"Author"   = 'Joaquim Perez;Pedro Serrão;Francisco Pereira'
 "Version"  = '1.0'
 "About"    = 'Compilador para a linguagem PICO'
-"Start Symbol" = <pico-program>
-!"Case Sensitive" = True  
-!Comment Start = '/*'
-!Comment End   = '*/'
-!Comment Line  = '//'                 
+"Start Symbol" = <pico-program>                
 !!!!!!!!!!!
 
-!!!!!!!!!!!             
+!!!!!!!!!!!
+! SÍMBOLOS TERMINAIS             
 _NewLine             = {CR}{LF}+[_] | {LF}+[_]
 _Tab                 = {HT}+[_]
 _Space               = {Space}+[_]
@@ -22,7 +19,8 @@ _Quote               = ["]
 !!!!!!!!!!!
         
 !!!!!!!!!!!
-<id>                 ::= _Id 
+! CHARACTER SETS
+<id>                 ::= _Id                  
 <letter>             ::= _Letter
 <digits>             ::= _Digits
 <newline>            ::= _NewLine
@@ -33,27 +31,43 @@ _Quote               = ["]
 !!!!!!!!!!!                      
    
 !!!!!!!!!!!
+! BASE
 <literal>            ::= '(' | ')' | '+' | '-' | ';' | '||' | ':' | ':='               
 <natural-constant>   ::= <digits>                
 <layout>             ::= <space> | <newline> | <tab>                                            
 <any-char-but-quote> ::= <letter> | <digits> | <literal> | <layout>                      
 <string-tail>        ::= <any-char-but-quote> <string-tail> | <quote>                      
-<string-constant>    ::= <quote> <string-tail>                                                       
+<string-constant>    ::= <quote> <string-tail>
+!!!!!!!!!!!                      
+            
+!!!!!!!!!!!
+! OPERAÇÕES BÁSICAS                                                                
 <id-type-list>       ::= <id> ':' <type> | <id> ':' <type> ',' <id-type-list>
-<decls>              ::= 'declare' <id-type-list> ';'
+<decls>              ::= 'declare' <id-type-list> ';'                                          
 <type>               ::= 'natural' | 'string'              
 <series>             ::= <empty> | <stat> | <stat> ';' <series>
 <stat>               ::= <assign> | <if> | <while> | <for>
 <assign>             ::= <id> ':=' <exp>
+!!!!!!!!!!!
+
+!!!!!!!!!!!
+! OPERANDOS                      
+<exp>                ::= <primary> | <plus> | <minus> | <conc>
+<primary>            ::= <id> | <natural-constant> | <string-constant> | '(' <exp> ')'
+<plus>               ::= <exp> '+' <primary>
+<minus>              ::= <exp> '-' <primary>
+<conc>               ::= <exp> '||' <primary>
+!!!!!!!!!!!
+
+!!!!!!!!!!!
+! IF E CICLOS                      
 <if>                 ::= <if-compact> 'fi' | <if-compact> 'else' <series> 'fi'
 <if-compact>         ::= 'if' <exp> 'then' <series>                                            
 <for-head>           ::= <assign> ';' <exp> ';' <assign>
 <for>                ::= 'for' <for-head> 'do' <series> 'od'                       
 <while>              ::= 'while' <exp> 'do' <series> 'od'
-<exp>                ::= <primary> | <plus> | <minus> | <conc>
-<primary>            ::= <id> | <natural-constant> | <string-constant> | '(' <exp> ')'
-<plus>               ::= <exp> '+' <primary>
-<minus>              ::= <exp> '-' <primary>
-<conc>               ::= <exp> '||' <primary>                      
+!!!!!!!!!!!
+
+!!!!!!!!!!!                                            
 <pico-program>       ::= 'begin' <decls> <series> 'end'                                     
-!!!!!!!!!!
+!!!!!!!!!!!
