@@ -8,13 +8,8 @@
 
 !!!!!!!!!!!
 ! SÍMBOLOS TERMINAIS
-             
-! WIP - para estes terminais, está a ser usado o [_]
-!       (isto é um simples workaround, vai ser preciso resolver isto)
-_NewLine             = {CR}{LF}+[_] | {LF}+[_]
-_Tab                 = {HT}+[_]
-_Space               = {Space}+[_]
-                     
+          
+_Space               = Whitespace
 {IdHead}             = {Letter}
 {IdTail}             = {IdHead} + {Digit}
 _Id                  = {IdHead}{IdTail}*
@@ -27,8 +22,6 @@ _Quote               = ["]
 <id>                 ::= _Id                  
 <letter>             ::= _Letter
 <digits>             ::= _Digits
-<newline>            ::= _NewLine
-<tab>                ::= _Tab
 <space>              ::= _Space
 <quote>              ::= _Quote                      
 <empty>              ::= <>
@@ -38,7 +31,7 @@ _Quote               = ["]
 ! BASE
 <literal>            ::= '(' | ')' | '+' | '-' | ';' | '||' | ':' | ':='               
 <natural-constant>   ::= <digits>                
-<layout>             ::= <space> | <newline> | <tab>                                            
+<layout>             ::= <space>                                          
 <any-char-but-quote> ::= <letter> | <digits> | <literal> | <layout>                      
 <string-tail>        ::= <any-char-but-quote> <string-tail> | <quote>                      
 <string-constant>    ::= <quote> <string-tail>
@@ -46,10 +39,10 @@ _Quote               = ["]
             
 !!!!!!!!!!!
 ! OPERAÇÕES BÁSICAS                                                                
-<id-type-list>       ::= <id> ':' <type> | <id> ':' <type> ',' <id-type-list>
+<id-type-list>       ::= <id> ':' <type> <empty> | <id> ':' <type> ',' <id-type-list>
 <decls>              ::= 'declare' <id-type-list> ';'                                          
 <type>               ::= 'natural' | 'string'              
-<series>             ::= <empty> | <stat> | <stat> ';' <series>
+<series>             ::= <empty> | <stat> <empty> | <stat> ';' <series>
 <stat>               ::= <assign> | <if> | <while> | <for>
 <assign>             ::= <id> ':=' <exp>
 !!!!!!!!!!!
