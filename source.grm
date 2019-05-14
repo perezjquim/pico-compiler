@@ -3,14 +3,14 @@
 "Author"   = 'Joaquim Perez;Pedro Serrão;Francisco Pereira'
 "Version"  = '1.0'
 "About"    = 'Compilador para a linguagem PICO'
-"Start Symbol" = <pico-program>                
+"Start Symbol" = <pico-program>                             
 !!!!!!!!!!!
 
 !!!!!!!!!!!
 ! SÍMBOLOS TERMINAIS
              
-! para estes terminais, está a ser usado o [_]
-! (isto é um simples workaround, vai ser preciso resolver isto)
+! WIP - para estes terminais, está a ser usado o [_]
+!       (isto é um simples workaround, vai ser preciso resolver isto)
 _NewLine             = {CR}{LF}+[_] | {LF}+[_]
 _Tab                 = {HT}+[_]
 _Space               = {Space}+[_]
