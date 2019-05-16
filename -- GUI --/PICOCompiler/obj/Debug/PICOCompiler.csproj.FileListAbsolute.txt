@@ -1,0 +1,11 @@
+c:\users\joaquim\documents\visual studio 2015\Projects\PICOCompiler\PICOCompiler\bin\Debug\PICOCompiler.exe.config
+C:\Users\Joaquim\Dropbox\Universidade\Teoria das Linguagens e Compiladores\Projeto\pico-compiler\-- GUI --\PICOCompiler\bin\Debug\PICOCompiler.exe.config
+C:\Users\Joaquim\Dropbox\Universidade\Teoria das Linguagens e Compiladores\Projeto\pico-compiler\-- GUI --\PICOCompiler\bin\Debug\PICOCompiler.exe
+C:\Users\Joaquim\Dropbox\Universidade\Teoria das Linguagens e Compiladores\Projeto\pico-compiler\-- GUI --\PICOCompiler\bin\Debug\PICOCompiler.pdb
+C:\Users\Joaquim\Dropbox\Universidade\Teoria das Linguagens e Compiladores\Projeto\pico-compiler\-- GUI --\PICOCompiler\bin\Debug\CalithaLib.dll
+C:\Users\Joaquim\Dropbox\Universidade\Teoria das Linguagens e Compiladores\Projeto\pico-compiler\-- GUI --\PICOCompiler\bin\Debug\GoldParserEngine.dll
+C:\Users\Joaquim\Dropbox\Universidade\Teoria das Linguagens e Compiladores\Projeto\pico-compiler\-- GUI --\PICOCompiler\obj\Debug\PICOCompiler.csprojResolveAssemblyReference.cache
+C:\Users\Joaquim\Dropbox\Universidade\Teoria das Linguagens e Compiladores\Projeto\pico-compiler\-- GUI --\PICOCompiler\obj\Debug\PICOCompiler.Properties.Resources.resources
+C:\Users\Joaquim\Dropbox\Universidade\Teoria das Linguagens e Compiladores\Projeto\pico-compiler\-- GUI --\PICOCompiler\obj\Debug\PICOCompiler.csproj.GenerateResource.Cache
+C:\Users\Joaquim\Dropbox\Universidade\Teoria das Linguagens e Compiladores\Projeto\pico-compiler\-- GUI --\PICOCompiler\obj\Debug\PICOCompiler.exe
+C:\Users\Joaquim\Dropbox\Universidade\Teoria das Linguagens e Compiladores\Projeto\pico-compiler\-- GUI --\PICOCompiler\obj\Debug\PICOCompiler.pdb
