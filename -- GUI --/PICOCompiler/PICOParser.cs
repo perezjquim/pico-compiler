@@ -4,6 +4,11 @@ using System.IO;
 using System.Runtime.Serialization;
 using com.calitha.goldparser.lalr;
 using com.calitha.commons;
+using PICOCompiler;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
 
 namespace com.calitha.goldparser
 {
@@ -171,6 +176,15 @@ namespace com.calitha.goldparser
     public class PICOParser
     {
         private LALRParser parser;
+
+        /*** MODIFICAÇÕES ***/
+        private MainForm _mainForm;
+        private LinkedList<Dictionary<string,string>> _errorList = new LinkedList<Dictionary<string,string>>();
+        public PICOParser(MainForm mainForm, String filename) : this( filename )
+        {
+            _mainForm = mainForm;
+        }
+        /*** MODIFICAÇÕES ***/
 
         public PICOParser(string filename)
         {
@@ -829,19 +843,85 @@ namespace com.calitha.goldparser
 
         private void AcceptEvent(LALRParser parser, AcceptEventArgs args)
         {
-            //todo: Use your fully reduced args.Token.UserObject
+            /*** MODIFICAÇÕES ***/
+            MessageBox.Show("The file has been read.");
+            /*** MODIFICAÇÕES ***/
         }
 
         private void TokenErrorEvent(LALRParser parser, TokenErrorEventArgs args)
         {
-            string message = "Token error with input: '"+args.Token.ToString()+"'";
-            //todo: Report message to UI?
+            /*** MODIFICAÇÕES ***/
+            String file_name = _mainForm.getFileName();
+            String error_type = "Lexical error";
+            String line_number = args.Token.Location.LineNr.ToString();
+            String col_number = args.Token.Location.ColumnNr.ToString();
+            String error_description = args.Token.ToString();
+            _insertError(file_name, error_type, line_number, col_number, error_description);
+            /*** MODIFICAÇÕES ***/
         }
 
         private void ParseErrorEvent(LALRParser parser, ParseErrorEventArgs args)
         {
-            string message = "Parse error caused by token: '"+args.UnexpectedToken.ToString()+"'";
-            //todo: Report message to UI?
+            /*** MODIFICAÇÕES ***/
+            String file_name = _mainForm.getFileName();
+            String error_type = "Syntax error";
+            String line_number = args.UnexpectedToken.Location.LineNr.ToString();
+            String col_number = args.UnexpectedToken.Location.ColumnNr.ToString();
+            String error_description = "Error at .." + args.UnexpectedToken.ToString();
+
+            String unexpectedToken = args.UnexpectedToken.ToString();
+            String expectedTokens = args.ExpectedTokens.ToString();        
+            String[] aExpectedTokens = expectedTokens.Split(' ');        
+            String nextToken = aExpectedTokens[0];
+
+            int token_id = 0; 
+            foreach (SymbolConstants symbol in (Enum.GetValues(typeof(SymbolConstants))))
+            {
+                String symbol_token = symbol.ToString()
+                    .Replace("SYMBOL_", "")
+                    .ToLower();
+
+                if(symbol_token == nextToken)
+                {
+                    token_id = (int) symbol;
+                    break;
+                }
+            }
+            
+            if (token_id == 0)
+            {
+                //
+                // não percebi o que ele tentou fazer aqui - WIP
+                //
+
+                /*for (int vv = 0; vv < 3; vv++)
+                {
+                    String k = Dibujo.Mi_Clase.e2.ElementAt(vv);
+                    if (k == tokensiguiente_nombre)
+                    {
+                        idtoken = Dibujo.Mi_Clase.e1.ElementAt(vv);
+                        break;
+                    }
+                }*/
+            }
+
+            _insertError(file_name, error_type, line_number, col_number, error_description);
+
+            Location location = new Location(0, 0, 0);
+            args.NextToken = new TerminalToken(new SymbolTerminal(token_id, nextToken), "", location);
+            args.Continue = ContinueMode.Insert;
+            /*** MODIFICAÇÕES ***/
+        }
+
+        private void _insertError(String file_name, String error_type, String line_number, String col_number, String error_description)
+        {
+            Dictionary<string, string> d = new Dictionary<string, string>();
+            d.Add("file_name", file_name);
+            d.Add("error_type", error_type);
+            d.Add("line_number", line_number);
+            d.Add("col_number", col_number);
+            d.Add("error_description", error_description);
+            _errorList.AddLast(d);
         }
 
 

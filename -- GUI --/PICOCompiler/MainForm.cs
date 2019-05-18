@@ -21,7 +21,7 @@ namespace PICOCompiler
         public MainForm()
         {
             InitializeComponent();
-            _parser = new PICOParser(Application.StartupPath + "\\GrammarTable.cgt");
+            _parser = new PICOParser(this,Application.StartupPath + "\\GrammarTable.cgt");
             //...
         }
 
@@ -55,6 +55,11 @@ namespace PICOCompiler
         private void _analyzeFile()
         {
             //...
+        }
+
+        public String getFileName()
+        {
+            return _file_name;
         }
     }
 
