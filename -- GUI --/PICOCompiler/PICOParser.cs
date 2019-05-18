@@ -168,11 +168,11 @@ namespace com.calitha.goldparser
         RULE_PICOPROGRAM_BEGIN_END  = 53  // <pico-program> ::= begin <decls> <series> end
     };
 
-    public class MyParser
+    public class PICOParser
     {
         private LALRParser parser;
 
-        public MyParser(string filename)
+        public PICOParser(string filename)
         {
             FileStream stream = new FileStream(filename,
                                                FileMode.Open, 
@@ -182,7 +182,7 @@ namespace com.calitha.goldparser
             stream.Close();
         }
 
-        public MyParser(string baseName, string resourceName)
+        public PICOParser(string baseName, string resourceName)
         {
             byte[] buffer = ResourceUtil.GetByteArrayResource(
                 System.Reflection.Assembly.GetExecutingAssembly(),
@@ -193,7 +193,7 @@ namespace com.calitha.goldparser
             stream.Close();
         }
 
-        public MyParser(Stream stream)
+        public PICOParser(Stream stream)
         {
             Init(stream);
         }
@@ -226,7 +226,8 @@ namespace com.calitha.goldparser
             }
             catch (Exception e)
             {
-                args.Continue = false;
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+                args.Continue = false;            
                 //todo: Report message to UI?
             }
         }
@@ -542,7 +543,8 @@ namespace com.calitha.goldparser
             }
             catch (Exception e)
             {
-                args.Continue = false;
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+                args.Continue = false;            
                 //todo: Report message to UI?
             }
         }
