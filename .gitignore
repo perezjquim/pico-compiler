@@ -1,0 +1,12 @@
+
+*.exe
+
+-- GUI --/PICOCompiler/obj/Debug/PICOCompiler\.csproj\.GenerateResource\.Cache
+
+-- GUI --/PICOCompiler/bin/Debug/PICOCompiler\.pdb
+
+-- GUI --/PICOCompiler/obj/Debug/PICOCompiler\.pdb
+
+-- GUI --/PICOCompiler/obj/Debug/DesignTimeResolveAssemblyReferences\.cache
+
+-- GUI --/PICOCompiler/bin/Debug/PICOCompiler\.vshost\.exe\.manifest
