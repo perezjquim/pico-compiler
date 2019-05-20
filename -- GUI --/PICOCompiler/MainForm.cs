@@ -41,32 +41,30 @@ namespace PICOCompiler
 
         private void _onOpenErrorList(object sender, EventArgs e)
         {
-            ErrorForm form = new ErrorForm();
-            //...
+            ErrorForm form = new ErrorForm();           
             _listErrors(form);
             form.Show();
         }
 
-        //porque void?? JOAQUIM
+        //porque void?? JOAQUIM >> não precisa de retornar nada, simplesmente trata da listagem
         /********           falta a função apresentarErros(), estou a tratar disso               *********************/
-         private void _listErrors(ErrorForm a)
+        private void _listErrors(ErrorForm form)
         {
-            foreach(Symbol tokenFail in PICOCompiler.PICOParser.GetErrorList)
-            {
-                System.Windows.Forms.ListViewItem lis = new System.Windows.Forms.ListViewItem(tokenFail.apresentarErros());
-                a.listView3.Items.Add(lis);
+            foreach(String[] error in _parser.GetErrorList())
+            {               
+                System.Windows.Forms.ListViewItem lis = new System.Windows.Forms.ListViewItem(error);
+                form._list.Items.Add(lis);
             }
         }
 
         private void _analyzeFile()
         {
-            //...
+            _parser.Parse(_file);
         }
 
         public String getFileName()
         {
             return _file_name;
-        }
+        }       
     }
-
 }

@@ -179,7 +179,7 @@ namespace com.calitha.goldparser
 
         /*** MODIFICAÇÕES ***/
         private MainForm _mainForm;
-        private LinkedList<Dictionary<string,string>> _errorList = new LinkedList<Dictionary<string,string>>();
+        private LinkedList<string[]> _errorList = new LinkedList<string[]>();
         public PICOParser(MainForm mainForm, String filename) : this( filename )
         {
             _mainForm = mainForm;
@@ -190,12 +190,12 @@ namespace com.calitha.goldparser
         //get e set da lista de erros "_errorList"
         
          //  public LinkedList<Dictionary<string, string>> ErrorList { get => _errorList; set => _errorList = value; }
-        public LinkedList<Dictionary<string, string>> GetErrorList()
+        public LinkedList<string[]> GetErrorList()
         {
             return _errorList;
         }
 
-        public void SetErrorList(LinkedList<Dictionary<string, string>> value)
+        public void SetErrorList(LinkedList<string[]> value)
         {
             _errorList = value;
         }
@@ -860,7 +860,7 @@ namespace com.calitha.goldparser
         private void AcceptEvent(LALRParser parser, AcceptEventArgs args)
         {
             /*** MODIFICAÇÕES ***/
-            MessageBox.Show("The file has been read.");
+            MessageBox.Show("The file has been read succesfully");
             /*** MODIFICAÇÕES ***/
         }
 
@@ -931,13 +931,8 @@ namespace com.calitha.goldparser
 
         private void _insertError(String file_name, String error_type, String line_number, String col_number, String error_description)
         {
-            Dictionary<string, string> d = new Dictionary<string, string>();
-            d.Add("file_name", file_name);
-            d.Add("error_type", error_type);
-            d.Add("line_number", line_number);
-            d.Add("col_number", col_number);
-            d.Add("error_description", error_description);
-            _errorList.AddLast(d);
+            String[] error = { file_name, error_type, line_number, col_number, error_description };
+            _errorList.AddLast(error);
         }
 
 
