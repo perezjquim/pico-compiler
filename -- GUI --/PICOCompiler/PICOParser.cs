@@ -185,6 +185,22 @@ namespace com.calitha.goldparser
             _mainForm = mainForm;
         }
         /*** MODIFICAÇÕES ***/
+        
+        /*************************************************************/
+        //get e set da lista de erros "_errorList"
+        
+         //  public LinkedList<Dictionary<string, string>> ErrorList { get => _errorList; set => _errorList = value; }
+        public LinkedList<Dictionary<string, string>> GetErrorList()
+        {
+            return _errorList;
+        }
+
+        public void SetErrorList(LinkedList<Dictionary<string, string>> value)
+        {
+            _errorList = value;
+        }
+        
+        /*************************************************************/
 
         public PICOParser(string filename)
         {
