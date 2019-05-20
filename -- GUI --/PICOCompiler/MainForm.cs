@@ -47,9 +47,15 @@ namespace PICOCompiler
             form.Show();
         }
 
-        private void _listErrors(ErrorForm a)
+        //porque void?? JOAQUIM
+        /********           falta a função apresentarErros(), estou a tratar disso               *********************/
+         private void _listErrors(ErrorForm a)
         {
-            //...
+            foreach(Symbol tokenFail in PICOCompiler.PICOParser.GetErrorList)
+            {
+                System.Windows.Forms.ListViewItem lis = new System.Windows.Forms.ListViewItem(tokenFail.apresentarErros());
+                a.listView3.Items.Add(lis);
+            }
         }
 
         private void _analyzeFile()
