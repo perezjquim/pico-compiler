@@ -7,34 +7,21 @@
 !!!!!!!!!!!
 
 !!!!!!!!!!!
-! SÍMBOLOS TERMINAIS
-          
-_Space               = Whitespace
+! SÍMBOLOS TERMINAIS         
 {IdHead}             = {Letter}
 {IdTail}             = {IdHead} + {Digit}
 _Id                  = {IdHead}{IdTail}*
 _Digits              = [123456789]{digit}*
-_Quote               = ["]            
+{String Char}        = {Printable} - ["]                     
+_String              = '"'{String Char}*'"'                                 
 !!!!!!!!!!!
         
 !!!!!!!!!!!
 ! CHARACTER SETS
 <id>                 ::= _Id                  
-<letter>             ::= _Letter
-<digits>             ::= _Digits
-<space>              ::= _Space
-<quote>              ::= _Quote                      
-<empty>              ::= <>
-!!!!!!!!!!!                      
-   
-!!!!!!!!!!!
-! BASE
-<literal>            ::= '(' | ')' | '+' | '-' | ';' | '||' | ':' | ':='               
-<natural-constant>   ::= <digits>                
-<layout>             ::= <space>                                          
-<any-char-but-quote> ::= <letter> | <digits> | <literal> | <layout>                      
-<string-tail>        ::= <any-char-but-quote> <string-tail> | <quote>                      
-<string-constant>    ::= <quote> <string-tail>
+<string-constant>    ::= _String                                            
+<empty>              ::= <>    
+<natural-constant>   ::= _Digits                
 !!!!!!!!!!!                      
             
 !!!!!!!!!!!

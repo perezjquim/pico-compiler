@@ -36,7 +36,7 @@
             this._strip_item_show_errors});
             this._strip_item_new.Name = "_strip_item_new";
             this._strip_item_new.Size = new System.Drawing.Size(54, 20);
-            this._strip_item_new.Text = "New";
+            this._strip_item_new.Text = "File";
             this._strip_item_open_file.Name = "_strip_item_open_file";
             this._strip_item_open_file.Size = new System.Drawing.Size(152, 22);
             this._strip_item_open_file.Text = "Open PICO file";

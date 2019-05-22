@@ -52,125 +52,96 @@ namespace com.calitha.goldparser
 
     }
 
-    enum SymbolConstants : int
+enum SymbolConstants : int
     {
-        SYMBOL_EOF                            =  0, // (EOF)
-        SYMBOL_ERROR                          =  1, // (Error)
-        SYMBOL_WHITESPACE                     =  2, // Whitespace
-        SYMBOL_MINUS                          =  3, // '-'
-        SYMBOL_LPAREN                         =  4, // '('
-        SYMBOL_RPAREN                         =  5, // ')'
-        SYMBOL_COMMA                          =  6, // ','
-        SYMBOL_COLON                          =  7, // ':'
-        SYMBOL_COLONEQ                        =  8, // ':='
-        SYMBOL_SEMI                           =  9, // ';'
-        SYMBOL__DIGITS                        = 10, // '_Digits'
-        SYMBOL__ID                            = 11, // '_Id'
-        SYMBOL__LETTER                        = 12, // '_Letter'
-        SYMBOL__QUOTE                         = 13, // '_Quote'
-        SYMBOL__SPACE                         = 14, // '_Space'
-        SYMBOL_PIPEPIPE                       = 15, // '||'
-        SYMBOL_PLUS                           = 16, // '+'
-        SYMBOL_BEGIN                          = 17, // begin
-        SYMBOL_DECLARE                        = 18, // declare
-        SYMBOL_DO                             = 19, // do
-        SYMBOL_ELSE                           = 20, // else
-        SYMBOL_END                            = 21, // end
-        SYMBOL_FI                             = 22, // fi
-        SYMBOL_FOR                            = 23, // for
-        SYMBOL_IF                             = 24, // if
-        SYMBOL_NATURAL                        = 25, // natural
-        SYMBOL_OD                             = 26, // od
-        SYMBOL_STRING                         = 27, // string
-        SYMBOL_THEN                           = 28, // then
-        SYMBOL_WHILE                          = 29, // while
-        SYMBOL_ANYMINUSCHARMINUSBUTMINUSQUOTE = 30, // <any-char-but-quote>
-        SYMBOL_ASSIGN                         = 31, // <assign>
-        SYMBOL_CONC                           = 32, // <conc>
-        SYMBOL_DECLS                          = 33, // <decls>
-        SYMBOL_DIGITS                         = 34, // <digits>
-        SYMBOL_EMPTY                          = 35, // <empty>
-        SYMBOL_EXP                            = 36, // <exp>
-        SYMBOL_FOR2                           = 37, // <for>
-        SYMBOL_FORMINUSHEAD                   = 38, // <for-head>
-        SYMBOL_ID                             = 39, // <id>
-        SYMBOL_IDMINUSTYPEMINUSLIST           = 40, // <id-type-list>
-        SYMBOL_IF2                            = 41, // <if>
-        SYMBOL_IFMINUSCOMPACT                 = 42, // <if-compact>
-        SYMBOL_LAYOUT                         = 43, // <layout>
-        SYMBOL_LETTER                         = 44, // <letter>
-        SYMBOL_LITERAL                        = 45, // <literal>
-        SYMBOL_MINUS2                         = 46, // <minus>
-        SYMBOL_NATURALMINUSCONSTANT           = 47, // <natural-constant>
-        SYMBOL_PICOMINUSPROGRAM               = 48, // <pico-program>
-        SYMBOL_PLUS2                          = 49, // <plus>
-        SYMBOL_PRIMARY                        = 50, // <primary>
-        SYMBOL_QUOTE                          = 51, // <quote>
-        SYMBOL_SERIES                         = 52, // <series>
-        SYMBOL_SPACE                          = 53, // <space>
-        SYMBOL_STAT                           = 54, // <stat>
-        SYMBOL_STRINGMINUSCONSTANT            = 55, // <string-constant>
-        SYMBOL_STRINGMINUSTAIL                = 56, // <string-tail>
-        SYMBOL_TYPE                           = 57, // <type>
-        SYMBOL_WHILE2                         = 58  // <while>
+        SYMBOL_EOF                  =  0, // (EOF)
+        SYMBOL_ERROR                =  1, // (Error)
+        SYMBOL_WHITESPACE           =  2, // Whitespace
+        SYMBOL_MINUS                =  3, // '-'
+        SYMBOL_LPAREN               =  4, // '('
+        SYMBOL_RPAREN               =  5, // ')'
+        SYMBOL_COMMA                =  6, // ','
+        SYMBOL_COLON                =  7, // ':'
+        SYMBOL_COLONEQ              =  8, // ':='
+        SYMBOL_SEMI                 =  9, // ';'
+        SYMBOL__DIGITS              = 10, // '_Digits'
+        SYMBOL__ID                  = 11, // '_Id'
+        SYMBOL__STRING              = 12, // '_String'
+        SYMBOL_PIPEPIPE             = 13, // '||'
+        SYMBOL_PLUS                 = 14, // '+'
+        SYMBOL_BEGIN                = 15, // begin
+        SYMBOL_DECLARE              = 16, // declare
+        SYMBOL_DO                   = 17, // do
+        SYMBOL_ELSE                 = 18, // else
+        SYMBOL_END                  = 19, // end
+        SYMBOL_FI                   = 20, // fi
+        SYMBOL_FOR                  = 21, // for
+        SYMBOL_IF                   = 22, // if
+        SYMBOL_NATURAL              = 23, // natural
+        SYMBOL_OD                   = 24, // od
+        SYMBOL_STRING               = 25, // string
+        SYMBOL_THEN                 = 26, // then
+        SYMBOL_WHILE                = 27, // while
+        SYMBOL_ASSIGN               = 28, // <assign>
+        SYMBOL_CONC                 = 29, // <conc>
+        SYMBOL_DECLS                = 30, // <decls>
+        SYMBOL_EMPTY                = 31, // <empty>
+        SYMBOL_EXP                  = 32, // <exp>
+        SYMBOL_FOR2                 = 33, // <for>
+        SYMBOL_FORMINUSHEAD         = 34, // <for-head>
+        SYMBOL_ID                   = 35, // <id>
+        SYMBOL_IDMINUSTYPEMINUSLIST = 36, // <id-type-list>
+        SYMBOL_IF2                  = 37, // <if>
+        SYMBOL_IFMINUSCOMPACT       = 38, // <if-compact>
+        SYMBOL_MINUS2               = 39, // <minus>
+        SYMBOL_NATURALMINUSCONSTANT = 40, // <natural-constant>
+        SYMBOL_PICOMINUSPROGRAM     = 41, // <pico-program>
+        SYMBOL_PLUS2                = 42, // <plus>
+        SYMBOL_PRIMARY              = 43, // <primary>
+        SYMBOL_SERIES               = 44, // <series>
+        SYMBOL_STAT                 = 45, // <stat>
+        SYMBOL_STRINGMINUSCONSTANT  = 46, // <string-constant>
+        SYMBOL_TYPE                 = 47, // <type>
+        SYMBOL_WHILE2               = 48  // <while>
     };
 
     enum RuleConstants : int
     {
-        RULE_ID__ID                 =  0, // <id> ::= '_Id'
-        RULE_LETTER__LETTER         =  1, // <letter> ::= '_Letter'
-        RULE_DIGITS__DIGITS         =  2, // <digits> ::= '_Digits'
-        RULE_SPACE__SPACE           =  3, // <space> ::= '_Space'
-        RULE_QUOTE__QUOTE           =  4, // <quote> ::= '_Quote'
-        RULE_EMPTY                  =  5, // <empty> ::= 
-        RULE_LITERAL_LPAREN         =  6, // <literal> ::= '('
-        RULE_LITERAL_RPAREN         =  7, // <literal> ::= ')'
-        RULE_LITERAL_PLUS           =  8, // <literal> ::= '+'
-        RULE_LITERAL_MINUS          =  9, // <literal> ::= '-'
-        RULE_LITERAL_SEMI           = 10, // <literal> ::= ';'
-        RULE_LITERAL_PIPEPIPE       = 11, // <literal> ::= '||'
-        RULE_LITERAL_COLON          = 12, // <literal> ::= ':'
-        RULE_LITERAL_COLONEQ        = 13, // <literal> ::= ':='
-        RULE_NATURALCONSTANT        = 14, // <natural-constant> ::= <digits>
-        RULE_LAYOUT                 = 15, // <layout> ::= <space>
-        RULE_ANYCHARBUTQUOTE        = 16, // <any-char-but-quote> ::= <letter>
-        RULE_ANYCHARBUTQUOTE2       = 17, // <any-char-but-quote> ::= <digits>
-        RULE_ANYCHARBUTQUOTE3       = 18, // <any-char-but-quote> ::= <literal>
-        RULE_ANYCHARBUTQUOTE4       = 19, // <any-char-but-quote> ::= <layout>
-        RULE_STRINGTAIL             = 20, // <string-tail> ::= <any-char-but-quote> <string-tail>
-        RULE_STRINGTAIL2            = 21, // <string-tail> ::= <quote>
-        RULE_STRINGCONSTANT         = 22, // <string-constant> ::= <quote> <string-tail>
-        RULE_IDTYPELIST_COLON       = 23, // <id-type-list> ::= <id> ':' <type> <empty>
-        RULE_IDTYPELIST_COLON_COMMA = 24, // <id-type-list> ::= <id> ':' <type> ',' <id-type-list>
-        RULE_DECLS_DECLARE_SEMI     = 25, // <decls> ::= declare <id-type-list> ';'
-        RULE_TYPE_NATURAL           = 26, // <type> ::= natural
-        RULE_TYPE_STRING            = 27, // <type> ::= string
-        RULE_SERIES                 = 28, // <series> ::= <empty>
-        RULE_SERIES2                = 29, // <series> ::= <stat> <empty>
-        RULE_SERIES_SEMI            = 30, // <series> ::= <stat> ';' <series>
-        RULE_STAT                   = 31, // <stat> ::= <assign>
-        RULE_STAT2                  = 32, // <stat> ::= <if>
-        RULE_STAT3                  = 33, // <stat> ::= <while>
-        RULE_STAT4                  = 34, // <stat> ::= <for>
-        RULE_ASSIGN_COLONEQ         = 35, // <assign> ::= <id> ':=' <exp>
-        RULE_EXP                    = 36, // <exp> ::= <primary>
-        RULE_EXP2                   = 37, // <exp> ::= <plus>
-        RULE_EXP3                   = 38, // <exp> ::= <minus>
-        RULE_EXP4                   = 39, // <exp> ::= <conc>
-        RULE_PRIMARY                = 40, // <primary> ::= <id>
-        RULE_PRIMARY2               = 41, // <primary> ::= <natural-constant>
-        RULE_PRIMARY3               = 42, // <primary> ::= <string-constant>
-        RULE_PRIMARY_LPAREN_RPAREN  = 43, // <primary> ::= '(' <exp> ')'
-        RULE_PLUS_PLUS              = 44, // <plus> ::= <exp> '+' <primary>
-        RULE_MINUS_MINUS            = 45, // <minus> ::= <exp> '-' <primary>
-        RULE_CONC_PIPEPIPE          = 46, // <conc> ::= <exp> '||' <primary>
-        RULE_IF_FI                  = 47, // <if> ::= <if-compact> fi
-        RULE_IF_ELSE_FI             = 48, // <if> ::= <if-compact> else <series> fi
-        RULE_IFCOMPACT_IF_THEN      = 49, // <if-compact> ::= if <exp> then <series>
-        RULE_WHILE_WHILE_DO_OD      = 50, // <while> ::= while <exp> do <series> od
-        RULE_FORHEAD_SEMI_SEMI      = 51, // <for-head> ::= <assign> ';' <exp> ';' <assign>
-        RULE_FOR_FOR_DO_OD          = 52, // <for> ::= for <for-head> do <series> od
-        RULE_PICOPROGRAM_BEGIN_END  = 53  // <pico-program> ::= begin <decls> <series> end
+        RULE_ID__ID                  =  0, // <id> ::= '_Id'
+        RULE_STRINGCONSTANT__STRING  =  1, // <string-constant> ::= '_String'
+        RULE_EMPTY                   =  2, // <empty> ::= 
+        RULE_NATURALCONSTANT__DIGITS =  3, // <natural-constant> ::= '_Digits'
+        RULE_IDTYPELIST_COLON        =  4, // <id-type-list> ::= <id> ':' <type> <empty>
+        RULE_IDTYPELIST_COLON_COMMA  =  5, // <id-type-list> ::= <id> ':' <type> ',' <id-type-list>
+        RULE_DECLS_DECLARE_SEMI      =  6, // <decls> ::= declare <id-type-list> ';'
+        RULE_TYPE_NATURAL            =  7, // <type> ::= natural
+        RULE_TYPE_STRING             =  8, // <type> ::= string
+        RULE_SERIES                  =  9, // <series> ::= <empty>
+        RULE_SERIES2                 = 10, // <series> ::= <stat> <empty>
+        RULE_SERIES_SEMI             = 11, // <series> ::= <stat> ';' <series>
+        RULE_STAT                    = 12, // <stat> ::= <assign>
+        RULE_STAT2                   = 13, // <stat> ::= <if>
+        RULE_STAT3                   = 14, // <stat> ::= <while>
+        RULE_STAT4                   = 15, // <stat> ::= <for>
+        RULE_ASSIGN_COLONEQ          = 16, // <assign> ::= <id> ':=' <exp>
+        RULE_EXP                     = 17, // <exp> ::= <primary>
+        RULE_EXP2                    = 18, // <exp> ::= <plus>
+        RULE_EXP3                    = 19, // <exp> ::= <minus>
+        RULE_EXP4                    = 20, // <exp> ::= <conc>
+        RULE_PRIMARY                 = 21, // <primary> ::= <id>
+        RULE_PRIMARY2                = 22, // <primary> ::= <natural-constant>
+        RULE_PRIMARY3                = 23, // <primary> ::= <string-constant>
+        RULE_PRIMARY_LPAREN_RPAREN   = 24, // <primary> ::= '(' <exp> ')'
+        RULE_PLUS_PLUS               = 25, // <plus> ::= <exp> '+' <primary>
+        RULE_MINUS_MINUS             = 26, // <minus> ::= <exp> '-' <primary>
+        RULE_CONC_PIPEPIPE           = 27, // <conc> ::= <exp> '||' <primary>
+        RULE_IF_FI                   = 28, // <if> ::= <if-compact> fi
+        RULE_IF_ELSE_FI              = 29, // <if> ::= <if-compact> else <series> fi
+        RULE_IFCOMPACT_IF_THEN       = 30, // <if-compact> ::= if <exp> then <series>
+        RULE_WHILE_WHILE_DO_OD       = 31, // <while> ::= while <exp> do <series> od
+        RULE_FORHEAD_SEMI_SEMI       = 32, // <for-head> ::= <assign> ';' <exp> ';' <assign>
+        RULE_FOR_FOR_DO_OD           = 33, // <for> ::= for <for-head> do <series> od
+        RULE_PICOPROGRAM_BEGIN_END   = 34  // <pico-program> ::= begin <decls> <series> end
     };
 
     public class PICOParser
@@ -179,7 +150,13 @@ namespace com.calitha.goldparser
 
         /*** MODIFICAÇÕES ***/
         private MainForm _mainForm;
+
+        // Lista de erros (sendo que cada erro é composto por um array de strings - posição 0 -> error_type, posição 1 -> line_number, ...)
         private LinkedList<string[]> _errorList = new LinkedList<string[]>();
+
+        // Guarda os tipos de dados associados a cada variável declarada no ficheiro .pico processado
+        private Dictionary<string, string> _declarations = new Dictionary<string,string>();
+
         public PICOParser(MainForm mainForm, String filename) : this( filename )
         {
             _mainForm = mainForm;
@@ -256,7 +233,7 @@ namespace com.calitha.goldparser
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine(e.ToString());
+                MessageBox.Show(e.ToString());
                 args.Continue = false;            
                 //todo: Report message to UI?
             }
@@ -326,18 +303,8 @@ namespace com.calitha.goldparser
                 //todo: Create a new object that corresponds to the symbol
                 return null;
 
-                case (int)SymbolConstants.SYMBOL__LETTER :
-                //'_Letter'
-                //todo: Create a new object that corresponds to the symbol
-                return null;
-
-                case (int)SymbolConstants.SYMBOL__QUOTE :
-                //'_Quote'
-                //todo: Create a new object that corresponds to the symbol
-                return null;
-
-                case (int)SymbolConstants.SYMBOL__SPACE :
-                //'_Space'
+                case (int)SymbolConstants.SYMBOL__STRING :
+                //string
                 //todo: Create a new object that corresponds to the symbol
                 return null;
 
@@ -401,11 +368,6 @@ namespace com.calitha.goldparser
                 //todo: Create a new object that corresponds to the symbol
                 return null;
 
-                case (int)SymbolConstants.SYMBOL_STRING :
-                //string
-                //todo: Create a new object that corresponds to the symbol
-                return null;
-
                 case (int)SymbolConstants.SYMBOL_THEN :
                 //then
                 //todo: Create a new object that corresponds to the symbol
@@ -413,11 +375,6 @@ namespace com.calitha.goldparser
 
                 case (int)SymbolConstants.SYMBOL_WHILE :
                 //while
-                //todo: Create a new object that corresponds to the symbol
-                return null;
-
-                case (int)SymbolConstants.SYMBOL_ANYMINUSCHARMINUSBUTMINUSQUOTE :
-                //<any-char-but-quote>
                 //todo: Create a new object that corresponds to the symbol
                 return null;
 
@@ -433,11 +390,6 @@ namespace com.calitha.goldparser
 
                 case (int)SymbolConstants.SYMBOL_DECLS :
                 //<decls>
-                //todo: Create a new object that corresponds to the symbol
-                return null;
-
-                case (int)SymbolConstants.SYMBOL_DIGITS :
-                //<digits>
                 //todo: Create a new object that corresponds to the symbol
                 return null;
 
@@ -481,21 +433,6 @@ namespace com.calitha.goldparser
                 //todo: Create a new object that corresponds to the symbol
                 return null;
 
-                case (int)SymbolConstants.SYMBOL_LAYOUT :
-                //<layout>
-                //todo: Create a new object that corresponds to the symbol
-                return null;
-
-                case (int)SymbolConstants.SYMBOL_LETTER :
-                //<letter>
-                //todo: Create a new object that corresponds to the symbol
-                return null;
-
-                case (int)SymbolConstants.SYMBOL_LITERAL :
-                //<literal>
-                //todo: Create a new object that corresponds to the symbol
-                return null;
-
                 case (int)SymbolConstants.SYMBOL_MINUS2 :
                 //<minus>
                 //todo: Create a new object that corresponds to the symbol
@@ -521,18 +458,8 @@ namespace com.calitha.goldparser
                 //todo: Create a new object that corresponds to the symbol
                 return null;
 
-                case (int)SymbolConstants.SYMBOL_QUOTE :
-                //<quote>
-                //todo: Create a new object that corresponds to the symbol
-                return null;
-
                 case (int)SymbolConstants.SYMBOL_SERIES :
                 //<series>
-                //todo: Create a new object that corresponds to the symbol
-                return null;
-
-                case (int)SymbolConstants.SYMBOL_SPACE :
-                //<space>
                 //todo: Create a new object that corresponds to the symbol
                 return null;
 
@@ -543,11 +470,6 @@ namespace com.calitha.goldparser
 
                 case (int)SymbolConstants.SYMBOL_STRINGMINUSCONSTANT :
                 //<string-constant>
-                //todo: Create a new object that corresponds to the symbol
-                return null;
-
-                case (int)SymbolConstants.SYMBOL_STRINGMINUSTAIL :
-                //<string-tail>
                 //todo: Create a new object that corresponds to the symbol
                 return null;
 
@@ -573,13 +495,13 @@ namespace com.calitha.goldparser
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine(e.ToString());
+                MessageBox.Show(e.ToString());
                 args.Continue = false;            
                 //todo: Report message to UI?
             }
         }
 
-        public static Object CreateObject(NonterminalToken token)
+        public Object CreateObject(NonterminalToken token)
         {
             switch (token.Rule.Id)
             {
@@ -588,23 +510,8 @@ namespace com.calitha.goldparser
                 //todo: Create a new object using the stored user objects.
                 return null;
 
-                case (int)RuleConstants.RULE_LETTER__LETTER :
-                //<letter> ::= '_Letter'
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_DIGITS__DIGITS :
-                //<digits> ::= '_Digits'
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_SPACE__SPACE :
-                //<space> ::= '_Space'
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_QUOTE__QUOTE :
-                //<quote> ::= '_Quote'
+                case (int)RuleConstants.RULE_STRINGCONSTANT__STRING :
+                //<string-constant> ::= '_String'
                 //todo: Create a new object using the stored user objects.
                 return null;
 
@@ -613,100 +520,26 @@ namespace com.calitha.goldparser
                 //todo: Create a new object using the stored user objects.
                 return null;
 
-                case (int)RuleConstants.RULE_LITERAL_LPAREN :
-                //<literal> ::= '('
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_LITERAL_RPAREN :
-                //<literal> ::= ')'
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_LITERAL_PLUS :
-                //<literal> ::= '+'
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_LITERAL_MINUS :
-                //<literal> ::= '-'
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_LITERAL_SEMI :
-                //<literal> ::= ';'
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_LITERAL_PIPEPIPE :
-                //<literal> ::= '||'
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_LITERAL_COLON :
-                //<literal> ::= ':'
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_LITERAL_COLONEQ :
-                //<literal> ::= ':='
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_NATURALCONSTANT :
+                case (int)RuleConstants.RULE_NATURALCONSTANT__DIGITS:
                 //<natural-constant> ::= <digits>
                 //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_LAYOUT :
-                //<layout> ::= <space>
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_ANYCHARBUTQUOTE :
-                //<any-char-but-quote> ::= <letter>
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_ANYCHARBUTQUOTE2 :
-                //<any-char-but-quote> ::= <digits>
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_ANYCHARBUTQUOTE3 :
-                //<any-char-but-quote> ::= <literal>
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_ANYCHARBUTQUOTE4 :
-                //<any-char-but-quote> ::= <layout>
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_STRINGTAIL :
-                //<string-tail> ::= <any-char-but-quote> <string-tail>
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_STRINGTAIL2 :
-                //<string-tail> ::= <quote>
-                //todo: Create a new object using the stored user objects.
-                return null;
-
-                case (int)RuleConstants.RULE_STRINGCONSTANT :
-                //<string-constant> ::= <quote> <string-tail>
-                //todo: Create a new object using the stored user objects.
-                return null;
+                return null;               
 
                 case (int)RuleConstants.RULE_IDTYPELIST_COLON :
-                //<id-type-list> ::= <id> ':' <type> <empty>
-                //todo: Create a new object using the stored user objects.
-                return null;
+                    //<id-type-list> ::= <id> ':' <type> <empty>
+                    //todo: Create a new object using the stored user objects.
+
+               // return null;
 
                 case (int)RuleConstants.RULE_IDTYPELIST_COLON_COMMA :
-                //<id-type-list> ::= <id> ':' <type> ',' <id-type-list>
-                //todo: Create a new object using the stored user objects.
-                return null;
+                    //<id-type-list> ::= <id> ':' <type> ',' <id-type-list>
+                    //todo: Create a new object using the stored user objects.
+
+                    string decl_var_name = ((TerminalToken)((NonterminalToken)token.Tokens[0]).Tokens[0]).Text;
+                    string decl_var_type = ((TerminalToken)((NonterminalToken)token.Tokens[2]).Tokens[0]).Text;
+
+                    _declarations.Add(decl_var_name, decl_var_type + "-constant");
+                    return null;
 
                 case (int)RuleConstants.RULE_DECLS_DECLARE_SEMI :
                 //<decls> ::= declare <id-type-list> ';'
@@ -716,11 +549,13 @@ namespace com.calitha.goldparser
                 case (int)RuleConstants.RULE_TYPE_NATURAL :
                 //<type> ::= natural
                 //todo: Create a new object using the stored user objects.
+                //_declarations.Add(token.Tokens[0].ToString(), "natural-constant");
                 return null;
 
                 case (int)RuleConstants.RULE_TYPE_STRING :
                 //<type> ::= string
                 //todo: Create a new object using the stored user objects.
+                //_declarations.Add(token.Tokens[0].ToString(), "string-constant");
                 return null;
 
                 case (int)RuleConstants.RULE_SERIES :
@@ -759,8 +594,19 @@ namespace com.calitha.goldparser
                 return null;
 
                 case (int)RuleConstants.RULE_ASSIGN_COLONEQ :
-                //<assign> ::= <id> ':=' <exp>
-                //todo: Create a new object using the stored user objects.
+                    //<assign> ::= <id> ':=' <exp>
+                    //todo: Create a new object using the stored user objects.
+                    if(!_isTypeValid(token))
+                    {
+                        String file_name = _mainForm.getFileName();
+                        String error_type = "Syntax error";
+                        Location error_location = ((TerminalToken)((NonterminalToken)token.Tokens[0]).Tokens[0]).Location;
+                        String line_number = error_location.LineNr.ToString();
+                        String col_number = error_location.ColumnNr.ToString();
+                        String error_description = "Invalid value assigned to a variable.";
+                        _insertError(file_name, error_type, line_number, col_number, error_description);
+                    }
+
                 return null;
 
                 case (int)RuleConstants.RULE_EXP :
@@ -871,7 +717,7 @@ namespace com.calitha.goldparser
             String error_type = "Lexical error";
             String line_number = args.Token.Location.LineNr.ToString();
             String col_number = args.Token.Location.ColumnNr.ToString();
-            String error_description = args.Token.ToString();
+            String error_description = "Unrecognized symbol at .. " +args.Token.ToString();
             _insertError(file_name, error_type, line_number, col_number, error_description);
             /*** MODIFICAÇÕES ***/
         }
@@ -883,7 +729,7 @@ namespace com.calitha.goldparser
             String error_type = "Syntax error";
             String line_number = args.UnexpectedToken.Location.LineNr.ToString();
             String col_number = args.UnexpectedToken.Location.ColumnNr.ToString();
-            String error_description = "Error at .." + args.UnexpectedToken.ToString();
+            String error_description = "Error at .. " + args.UnexpectedToken.ToString();
 
             String unexpectedToken = args.UnexpectedToken.ToString();
             String expectedTokens = args.ExpectedTokens.ToString();        
@@ -904,13 +750,13 @@ namespace com.calitha.goldparser
                 }
             }
             
-            if (token_id == 0)
+            /*if (token_id == 0)
             {
                 //
                 // não percebi o que ele tentou fazer aqui - WIP
                 //
 
-                /*for (int vv = 0; vv < 3; vv++)
+                for (int vv = 0; vv < 3; vv++)
                 {
                     String k = Dibujo.Mi_Clase.e2.ElementAt(vv);
                     if (k == tokensiguiente_nombre)
@@ -918,8 +764,8 @@ namespace com.calitha.goldparser
                         idtoken = Dibujo.Mi_Clase.e1.ElementAt(vv);
                         break;
                     }
-                }*/
-            }
+                }
+            }*/
 
             _insertError(file_name, error_type, line_number, col_number, error_description);
 
@@ -935,6 +781,56 @@ namespace com.calitha.goldparser
             _errorList.AddLast(error);
         }
 
+        private bool _isTypeValid(NonterminalToken token)
+        {
+            string assign_var_name = ((TerminalToken)((NonterminalToken)token.Tokens[0]).Tokens[0]).Text;
+            string actual_var_type;
+            _declarations.TryGetValue(assign_var_name, out actual_var_type);
+
+
+            string assign_var_type = _getAssignVarType(token);
+
+            return true;
+        }
+
+        private string _getAssignVarType(TerminalToken token)
+        {
+            return "";
+        }
+
+        private string _getAssignVarType(NonterminalToken token)
+        {
+            string token_str = token.ToString();
+
+            string assign_var_type = "";
+            int assign_rule_id = ((NonterminalToken)((NonterminalToken)token.Tokens[2]).Tokens[0]).Rule.Id;
+
+            switch (assign_rule_id)
+            {
+                case (int)RuleConstants.RULE_PRIMARY:
+                    //<primary> ::= <id>
+                    string assign_var_primary = ((TerminalToken)((NonterminalToken)((NonterminalToken)((NonterminalToken)(token.Tokens[2])).Tokens[0]).Tokens[0]).Tokens[0]).Text;
+                    _declarations.TryGetValue(assign_var_primary, out assign_var_type);
+                    break;                  
+
+                case (int)RuleConstants.RULE_PRIMARY2:
+                case (int)RuleConstants.RULE_PRIMARY3:
+                    //<primary> ::= <string-constant>
+                    assign_var_type = ((NonterminalToken)((NonterminalToken)token.Tokens[2]).Tokens[0]).Rule.Rhs[0].Name;
+                    break;
+
+                case (int)RuleConstants.RULE_ASSIGN_COLONEQ:
+                    //<primary> ::= '(' <exp> ')'
+                    //todo: Create a new object using the stored user objects.
+                    assign_var_type = "";
+                    break;
+
+                default:
+                    break;
+            }
+
+            return assign_var_type;
+        }
 
     }
 }
