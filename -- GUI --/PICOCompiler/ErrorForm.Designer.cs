@@ -40,7 +40,7 @@
             this._col_filename.Width = 300;
             this._col_error_type.Text = "Error type";
             this._col_error_type.Width = 100;
-            this._col_queue.Text = "# Queue";
+            this._col_queue.Text = "Line";
             this._col_queue.Width = 100;
             this._col_column.Text = "Column";
             this._col_column.Width = 100;

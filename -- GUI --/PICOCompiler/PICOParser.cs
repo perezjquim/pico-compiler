@@ -596,14 +596,26 @@ enum SymbolConstants : int
                 case (int)RuleConstants.RULE_ASSIGN_COLONEQ :
                     //<assign> ::= <id> ':=' <exp>
                     //todo: Create a new object using the stored user objects.
-                    if(!_isTypeValid(token))
+                    string actual_var_type = _getActualVarType(token);
+                    if(actual_var_type == null)
                     {
                         String file_name = _mainForm.getFileName();
                         String error_type = "Syntax error";
                         Location error_location = ((TerminalToken)((NonterminalToken)token.Tokens[0]).Tokens[0]).Location;
-                        String line_number = error_location.LineNr.ToString();
+                        String line_number = (error_location.LineNr + 1).ToString();
                         String col_number = error_location.ColumnNr.ToString();
-                        String error_description = "Invalid value assigned to a variable.";
+                        String error_description = "Undeclared variable '"+ ((TerminalToken)((NonterminalToken)token.Tokens[0]).Tokens[0]).Text +"'.";
+                        _insertError(file_name, error_type, line_number, col_number, error_description);
+                    }
+
+                    else if(!_isTypeValid(token,actual_var_type))
+                    {
+                        String file_name = _mainForm.getFileName();
+                        String error_type = "Syntax error";
+                        Location error_location = ((TerminalToken)((NonterminalToken)token.Tokens[0]).Tokens[0]).Location;
+                        String line_number = (error_location.LineNr + 1).ToString();
+                        String col_number = error_location.ColumnNr.ToString();
+                        String error_description = "Invalid data type of assigned value to variable '" + ((TerminalToken)((NonterminalToken)token.Tokens[0]).Tokens[0]).Text + "'.";
                         _insertError(file_name, error_type, line_number, col_number, error_description);
                     }
 
@@ -781,21 +793,26 @@ enum SymbolConstants : int
             _errorList.AddLast(error);
         }
 
-        private bool _isTypeValid(NonterminalToken token)
+        private string _getActualVarType(NonterminalToken token)
         {
             string assign_var_name = ((TerminalToken)((NonterminalToken)token.Tokens[0]).Tokens[0]).Text;
             string actual_var_type;
             _declarations.TryGetValue(assign_var_name, out actual_var_type);
 
-
-            string assign_var_type = _getAssignVarType(token);
-
-            return true;
+            return actual_var_type;
         }
 
-        private string _getAssignVarType(TerminalToken token)
+        private bool _isTypeValid(NonterminalToken token, string actual_var_type)
         {
-            return "";
+            /*string assign_var_type = _getAssignVarType(token);
+
+            return true;*/
+
+            string token_str = token.ToString();
+
+            string assign_var_type = _getAssignVarType((NonterminalToken)(token.Tokens[2]));
+            return assign_var_type.Equals(actual_var_type);
+            
         }
 
         private string _getAssignVarType(NonterminalToken token)
@@ -803,31 +820,65 @@ enum SymbolConstants : int
             string token_str = token.ToString();
 
             string assign_var_type = "";
-            int assign_rule_id = ((NonterminalToken)((NonterminalToken)token.Tokens[2]).Tokens[0]).Rule.Id;
 
-            switch (assign_rule_id)
+            Token next_token = token.Tokens[0];
+
+            if (next_token.GetType() == typeof(TerminalToken))
+            {
+                switch(((TerminalToken)next_token).Symbol.Id)
+                {
+                    case (int)SymbolConstants.SYMBOL__DIGITS:
+                        assign_var_type = "natural-constant";
+                        break;
+
+                    case (int)SymbolConstants.SYMBOL__STRING:
+                        assign_var_type = "string-constant";
+                        break;
+
+                    case (int)SymbolConstants.SYMBOL__ID:
+                        _declarations.TryGetValue(((TerminalToken)next_token).Text.ToString(), out assign_var_type);
+                        break;
+                }
+                
+            }
+            else
+            {
+                assign_var_type = _getAssignVarType((NonterminalToken)next_token);
+            }
+
+            //int assign_rule_id = ((NonterminalToken)((NonterminalToken)(((NonterminalToken)token).Tokens[2])).Tokens[0]).Rule.Id;
+
+            /*switch (assign_rule_id)
             {
                 case (int)RuleConstants.RULE_PRIMARY:
                     //<primary> ::= <id>
-                    string assign_var_primary = ((TerminalToken)((NonterminalToken)((NonterminalToken)((NonterminalToken)(token.Tokens[2])).Tokens[0]).Tokens[0]).Tokens[0]).Text;
+                    string assign_var_primary = ((TerminalToken)((NonterminalToken)((NonterminalToken)((NonterminalToken)(((NonterminalToken)token).Tokens[2])).Tokens[0]).Tokens[0]).Tokens[0]).Text;
                     _declarations.TryGetValue(assign_var_primary, out assign_var_type);
                     break;                  
 
                 case (int)RuleConstants.RULE_PRIMARY2:
                 case (int)RuleConstants.RULE_PRIMARY3:
                     //<primary> ::= <string-constant>
-                    assign_var_type = ((NonterminalToken)((NonterminalToken)token.Tokens[2]).Tokens[0]).Rule.Rhs[0].Name;
+                    assign_var_type = ((NonterminalToken)((NonterminalToken)((NonterminalToken)token).Tokens[2]).Tokens[0]).Rule.Rhs[0].Name;
                     break;
 
-                case (int)RuleConstants.RULE_ASSIGN_COLONEQ:
+//                case (int)RuleConstants.RULE_ASSIGN_COLONEQ:
                     //<primary> ::= '(' <exp> ')'
                     //todo: Create a new object using the stored user objects.
-                    assign_var_type = "";
-                    break;
+//                    assign_var_type = "";
+//                    break;
 
-                default:
+                  default:
+                    if(token.GetType() == typeof(TerminalToken))
+                    {
+                        _declarations.TryGetValue(((TerminalToken)token).Text.ToString(), out assign_var_type);
+                    }
+                    else
+                    {
+                        assign_var_type = _getAssignVarType(((NonterminalToken)token).Tokens[0]);
+                    }
                     break;
-            }
+            }*/
 
             return assign_var_type;
         }

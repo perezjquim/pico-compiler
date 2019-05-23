@@ -45,8 +45,6 @@ namespace PICOCompiler
             form.Show();
         }
 
-        //porque void?? JOAQUIM >> não precisa de retornar nada, simplesmente trata da listagem
-        /********           falta a função apresentarErros(), estou a tratar disso               *********************/
         private void _listErrors(ErrorForm form)
         {
             foreach(String[] error in _parser.GetErrorList())
