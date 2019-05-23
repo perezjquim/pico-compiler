@@ -164,9 +164,6 @@ enum SymbolConstants : int
         /*** MODIFICAÇÕES ***/
         
         /*************************************************************/
-        //get e set da lista de erros "_errorList"
-        
-         //  public LinkedList<Dictionary<string, string>> ErrorList { get => _errorList; set => _errorList = value; }
         public LinkedList<string[]> GetErrorList()
         {
             return _errorList;
@@ -761,23 +758,6 @@ enum SymbolConstants : int
                     break;
                 }
             }
-            
-            /*if (token_id == 0)
-            {
-                //
-                // não percebi o que ele tentou fazer aqui - WIP
-                //
-
-                for (int vv = 0; vv < 3; vv++)
-                {
-                    String k = Dibujo.Mi_Clase.e2.ElementAt(vv);
-                    if (k == tokensiguiente_nombre)
-                    {
-                        idtoken = Dibujo.Mi_Clase.e1.ElementAt(vv);
-                        break;
-                    }
-                }
-            }*/
 
             _insertError(file_name, error_type, line_number, col_number, error_description);
 
@@ -802,36 +782,8 @@ enum SymbolConstants : int
             return actual_var_type;
         }
 
-        /*private bool _isTypeValid(TerminalToken token, string actual_var_type)
-        {
-            switch (token.Symbol.Id)
-            {
-                case (int)SymbolConstants.SYMBOL__DIGITS:
-                    return actual_var_type.Equals("natural-constant");
-
-                case (int)SymbolConstants.SYMBOL__STRING:
-                    return actual_var_type.Equals("natural-constant");
-
-                case (int)SymbolConstants.SYMBOL__ID:
-                    string assign_var_type;
-                    _declarations.TryGetValue(token.Text.ToString(), out assign_var_type);
-                    return assign_var_type.Equals(actual_var_type);                   
-            }
-            return false;
-        }*/
-
         private bool _isTypeValid(Token token, string actual_var_type)
-        {
-            /*string assign_var_type = _getAssignVarType(token);
-
-            return true;*/
-
-            //string token_str = token.ToString();
-
-            //string assign_var_type = _getAssignVarType((NonterminalToken)(token.Tokens[2]));
-            //return assign_var_type.Equals(actual_var_type);
-
-
+        {        
             if (token.GetType() == typeof(TerminalToken))
             {
                 switch (((TerminalToken)token).Symbol.Id)
@@ -861,75 +813,7 @@ enum SymbolConstants : int
                 }
             }
 
-        }
-
-        private string _getAssignVarType(NonterminalToken token)
-        {
-            string token_str = token.ToString();
-
-            string assign_var_type = "";
-
-            Token next_token = token.Tokens[0];
-
-            if (next_token.GetType() == typeof(TerminalToken))
-            {
-                switch(((TerminalToken)next_token).Symbol.Id)
-                {
-                    case (int)SymbolConstants.SYMBOL__DIGITS:
-                        assign_var_type = "natural-constant";
-                        break;
-
-                    case (int)SymbolConstants.SYMBOL__STRING:
-                        assign_var_type = "string-constant";
-                        break;
-
-                    case (int)SymbolConstants.SYMBOL__ID:
-                        _declarations.TryGetValue(((TerminalToken)next_token).Text.ToString(), out assign_var_type);
-                        break;
-                }
-                
-            }
-            else
-            {
-                assign_var_type = _getAssignVarType((NonterminalToken)next_token);
-            }
-
-            //int assign_rule_id = ((NonterminalToken)((NonterminalToken)(((NonterminalToken)token).Tokens[2])).Tokens[0]).Rule.Id;
-
-            /*switch (assign_rule_id)
-            {
-                case (int)RuleConstants.RULE_PRIMARY:
-                    //<primary> ::= <id>
-                    string assign_var_primary = ((TerminalToken)((NonterminalToken)((NonterminalToken)((NonterminalToken)(((NonterminalToken)token).Tokens[2])).Tokens[0]).Tokens[0]).Tokens[0]).Text;
-                    _declarations.TryGetValue(assign_var_primary, out assign_var_type);
-                    break;                  
-
-                case (int)RuleConstants.RULE_PRIMARY2:
-                case (int)RuleConstants.RULE_PRIMARY3:
-                    //<primary> ::= <string-constant>
-                    assign_var_type = ((NonterminalToken)((NonterminalToken)((NonterminalToken)token).Tokens[2]).Tokens[0]).Rule.Rhs[0].Name;
-                    break;
-
-//                case (int)RuleConstants.RULE_ASSIGN_COLONEQ:
-                    //<primary> ::= '(' <exp> ')'
-                    //todo: Create a new object using the stored user objects.
-//                    assign_var_type = "";
-//                    break;
-
-                  default:
-                    if(token.GetType() == typeof(TerminalToken))
-                    {
-                        _declarations.TryGetValue(((TerminalToken)token).Text.ToString(), out assign_var_type);
-                    }
-                    else
-                    {
-                        assign_var_type = _getAssignVarType(((NonterminalToken)token).Tokens[0]);
-                    }
-                    break;
-            }*/
-
-            return assign_var_type;
-        }
+        }    
 
     }
 }
