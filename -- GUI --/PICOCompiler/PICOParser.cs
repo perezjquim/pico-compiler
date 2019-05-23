@@ -465,6 +465,11 @@ enum SymbolConstants : int
                 //todo: Create a new object that corresponds to the symbol
                 return null;
 
+                case (int)SymbolConstants.SYMBOL_STRING:
+                //<string-constant>
+                //todo: Create a new object that corresponds to the symbol
+                return null;
+
                 case (int)SymbolConstants.SYMBOL_STRINGMINUSCONSTANT :
                 //<string-constant>
                 //todo: Create a new object that corresponds to the symbol
