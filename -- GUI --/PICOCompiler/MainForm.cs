@@ -47,10 +47,13 @@ namespace PICOCompiler
 
         private void _listErrors(ErrorForm form)
         {
-            foreach(String[] error in _parser.GetErrorList())
-            {               
-                System.Windows.Forms.ListViewItem lis = new System.Windows.Forms.ListViewItem(error);
-                form._list.Items.Add(lis);
+            if(_parser != null)
+            {
+                foreach (String[] error in _parser.GetErrorList())
+                {
+                    System.Windows.Forms.ListViewItem lis = new System.Windows.Forms.ListViewItem(error);
+                    form._list.Items.Add(lis);
+                }
             }
         }
 

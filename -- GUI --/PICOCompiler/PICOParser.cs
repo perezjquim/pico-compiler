@@ -802,17 +802,65 @@ enum SymbolConstants : int
             return actual_var_type;
         }
 
-        private bool _isTypeValid(NonterminalToken token, string actual_var_type)
+        /*private bool _isTypeValid(TerminalToken token, string actual_var_type)
+        {
+            switch (token.Symbol.Id)
+            {
+                case (int)SymbolConstants.SYMBOL__DIGITS:
+                    return actual_var_type.Equals("natural-constant");
+
+                case (int)SymbolConstants.SYMBOL__STRING:
+                    return actual_var_type.Equals("natural-constant");
+
+                case (int)SymbolConstants.SYMBOL__ID:
+                    string assign_var_type;
+                    _declarations.TryGetValue(token.Text.ToString(), out assign_var_type);
+                    return assign_var_type.Equals(actual_var_type);                   
+            }
+            return false;
+        }*/
+
+        private bool _isTypeValid(Token token, string actual_var_type)
         {
             /*string assign_var_type = _getAssignVarType(token);
 
             return true;*/
 
-            string token_str = token.ToString();
+            //string token_str = token.ToString();
 
-            string assign_var_type = _getAssignVarType((NonterminalToken)(token.Tokens[2]));
-            return assign_var_type.Equals(actual_var_type);
-            
+            //string assign_var_type = _getAssignVarType((NonterminalToken)(token.Tokens[2]));
+            //return assign_var_type.Equals(actual_var_type);
+
+
+            if (token.GetType() == typeof(TerminalToken))
+            {
+                switch (((TerminalToken)token).Symbol.Id)
+                {
+                    case (int)SymbolConstants.SYMBOL__DIGITS:
+                        return actual_var_type.Equals("natural-constant");
+
+                    case (int)SymbolConstants.SYMBOL__STRING:
+                        return actual_var_type.Equals("string-constant");
+
+                    case (int)SymbolConstants.SYMBOL__ID:
+                        string assign_var_type;
+                        _declarations.TryGetValue(((TerminalToken)token).Text.ToString(), out assign_var_type);
+                        return actual_var_type.Equals(assign_var_type);
+                }
+                return false;
+            }
+            else
+            {
+                if (((NonterminalToken)token).Tokens.Length > 1)
+                {
+                    return _isTypeValid(((NonterminalToken)token).Tokens[0], actual_var_type) && _isTypeValid(((NonterminalToken)token).Tokens[2], actual_var_type);
+                }
+                else
+                {
+                    return _isTypeValid(((NonterminalToken)token).Tokens[0], actual_var_type);
+                }
+            }
+
         }
 
         private string _getAssignVarType(NonterminalToken token)
