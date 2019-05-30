@@ -154,6 +154,8 @@ enum SymbolConstants : int
         // Lista de erros (sendo que cada erro é composto por um array de strings - posição 0 -> error_type, posição 1 -> line_number, ...)
         private LinkedList<string[]> _errorList = new LinkedList<string[]>();
 
+        private TreeNode _tree = new TreeNode();
+
         // Guarda os tipos de dados associados a cada variável declarada no ficheiro .pico processado
         private Dictionary<string, string> _declarations = new Dictionary<string,string>();
 
@@ -173,7 +175,14 @@ enum SymbolConstants : int
         {
             _errorList = value;
         }
-        
+        public TreeNode GetTree()
+        {
+            return _tree;
+        }
+        public void SetTree(TreeNode tree)
+        {
+            _tree = tree;
+        }
         /*************************************************************/
 
         public PICOParser(string filename)
@@ -219,7 +228,6 @@ enum SymbolConstants : int
         public void Parse(string source)
         {
             parser.Parse(source);
-
         }
 
         private void TokenReadEvent(LALRParser parser, TokenReadEventArgs args)
@@ -505,6 +513,7 @@ enum SymbolConstants : int
 
         public Object CreateObject(NonterminalToken token)
         {
+            _tree.Nodes.Add(token.Rule.Id.ToString());
             switch (token.Rule.Id)
             {
                 case (int)RuleConstants.RULE_ID__ID :
