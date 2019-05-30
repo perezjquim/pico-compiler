@@ -45,6 +45,12 @@ namespace PICOCompiler
             form.Show();
         }
 
+        private void _onOpenParseTree(object sender, EventArgs e)
+        {
+            ParserTreeForm form = new ParserTreeForm();
+            form.Show();
+        }
+
         private void _listErrors(ErrorForm form)
         {
             if(_parser != null)

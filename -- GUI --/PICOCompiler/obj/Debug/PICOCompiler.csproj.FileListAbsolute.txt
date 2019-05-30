@@ -11,3 +11,4 @@ C:\Users\Joaquim\Dropbox\Universidade\Teoria das Linguagens e Compiladores\Proje
 C:\Users\Joaquim\Dropbox\Universidade\Teoria das Linguagens e Compiladores\Projeto\pico-compiler\-- GUI --\PICOCompiler\obj\Debug\PICOCompiler.pdb
 C:\Users\Joaquim\Dropbox\Universidade\Teoria das Linguagens e Compiladores\Projeto\pico-compiler\-- GUI --\PICOCompiler\obj\Debug\PICOCompiler.ErrorForm.resources
 C:\Users\Joaquim\Dropbox\Universidade\Teoria das Linguagens e Compiladores\Projeto\pico-compiler\-- GUI --\PICOCompiler\obj\Debug\PICOCompiler.MainForm.resources
+C:\Users\Joaquim\Dropbox\Universidade\Teoria das Linguagens e Compiladores\Projeto\pico-compiler\-- GUI --\PICOCompiler\obj\Debug\PICOCompiler.ParserTreeForm.resources

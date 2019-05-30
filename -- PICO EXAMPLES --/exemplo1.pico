@@ -3,7 +3,7 @@ begin declare input : natural,
               repnr : natural,
               rep : natural;
       input := 14;
-      output := input + 1 + "ola" + 2;
+      output := input + "<natural-constant>" + 1 + 2;
       while input - 1 do
           rep := output;
           repnr := input;

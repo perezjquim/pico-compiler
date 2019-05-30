@@ -21,6 +21,7 @@
             this._strip_item_new = new System.Windows.Forms.ToolStripMenuItem();
             this._strip_item_open_file = new System.Windows.Forms.ToolStripMenuItem();
             this._strip_item_show_errors = new System.Windows.Forms.ToolStripMenuItem();
+            this._strip_item_show_tree = new System.Windows.Forms.ToolStripMenuItem();
             this._dialog_file = new System.Windows.Forms.OpenFileDialog();
             this._strip.SuspendLayout();
             this.SuspendLayout();
@@ -33,7 +34,8 @@
             this._strip.Text = "_strip";       
             this._strip_item_new.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._strip_item_open_file,
-            this._strip_item_show_errors});
+            this._strip_item_show_errors,
+            this._strip_item_show_tree});
             this._strip_item_new.Name = "_strip_item_new";
             this._strip_item_new.Size = new System.Drawing.Size(54, 20);
             this._strip_item_new.Text = "File";
@@ -45,6 +47,10 @@
             this._strip_item_show_errors.Size = new System.Drawing.Size(152, 22);
             this._strip_item_show_errors.Text = "Show errors";
             this._strip_item_show_errors.Click += new System.EventHandler(this._onOpenErrorList);
+            this._strip_item_show_tree.Name = "_strip_item_show_tree";
+            this._strip_item_show_tree.Size = new System.Drawing.Size(152, 22);
+            this._strip_item_show_tree.Text = "Show parse tree";
+            this._strip_item_show_tree.Click += new System.EventHandler(this._onOpenParseTree);
             this._dialog_file.FileName = "_dialog_file";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -66,6 +72,7 @@
         private System.Windows.Forms.ToolStripMenuItem _strip_item_new;
         private System.Windows.Forms.ToolStripMenuItem _strip_item_open_file;
         private System.Windows.Forms.ToolStripMenuItem _strip_item_show_errors;
+        private System.Windows.Forms.ToolStripMenuItem _strip_item_show_tree;
         private System.Windows.Forms.OpenFileDialog _dialog_file;
     }
 }
