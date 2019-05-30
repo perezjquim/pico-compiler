@@ -513,7 +513,6 @@ enum SymbolConstants : int
 
         public Object CreateObject(NonterminalToken token)
         {
-            _tree.Nodes.Add(token.Rule.Id.ToString());
             switch (token.Rule.Id)
             {
                 case (int)RuleConstants.RULE_ID__ID :
@@ -718,8 +717,9 @@ enum SymbolConstants : int
                 return null;
 
                 case (int)RuleConstants.RULE_PICOPROGRAM_BEGIN_END :
-                //<pico-program> ::= begin <decls> <series> end
-                //todo: Create a new object using the stored user objects.
+                    //<pico-program> ::= begin <decls> <series> end
+                    //todo: Create a new object using the stored user objects. 
+                    _parseTree(token);
                 return null;
 
             }
@@ -827,7 +827,38 @@ enum SymbolConstants : int
                 }
             }
 
-        }    
-
+        }
+        
+        private void _parseTree(Token token)
+        {
+            if (token is NonterminalToken)
+            {
+                TreeNode node = _tree.Nodes.Add(((NonterminalToken)token).Rule.ToString());
+                foreach (Token t in ((NonterminalToken)token).Tokens)
+                {
+                    _parseTree(t, node);
+                }
+            }
+            else
+            {
+                _tree.Nodes.Add(((TerminalToken)token).Text.ToString());
+            }
+        }
+        
+        private void _parseTree(Token token, TreeNode prevNode)
+        {
+            if (token is NonterminalToken)
+            {
+                TreeNode node = prevNode.Nodes.Add(((NonterminalToken)token).Rule.ToString());
+                foreach (Token t in ((NonterminalToken)token).Tokens)
+                {
+                    _parseTree(t, node);
+                }
+            }
+            else
+            {
+                prevNode.Nodes.Add(((TerminalToken)token).Text.ToString());
+            }
+        }            
     }
 }
