@@ -33,20 +33,19 @@
             // 
             // treeView1
             // 
-            this.treeView1.Location = new System.Drawing.Point(13, 13);
+            this.treeView1.Location = new System.Drawing.Point(12, 12);
             this.treeView1.Name = "treeView1";
-
-            this.treeView1.Size = new System.Drawing.Size(400, 400);         
+            this.treeView1.Size = new System.Drawing.Size(476, 476);
             this.treeView1.TabIndex = 0;
             // 
-            // ParserTree
+            // ParserTreeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(500, 500);
             this.Controls.Add(this.treeView1);
-            this.Name = "ParserTree";
-            this.Text = "ParserTree";
+            this.Name = "ParserTreeForm";
+            this.Text = "PICOCompiler - Parsing tree";
             this.ResumeLayout(false);
 
         }

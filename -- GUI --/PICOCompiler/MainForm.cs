@@ -49,7 +49,7 @@ namespace PICOCompiler
         {
             if(_parser != null)
             {
-                ParserTreeForm form = new ParserTreeForm(_parser.GetTree());
+                ParserTreeForm form = new ParserTreeForm(_parser.GetTree().Clone() as TreeNode);
                 form.Show();
             }            
         }
@@ -75,6 +75,74 @@ namespace PICOCompiler
         public String getFileName()
         {
             return _file_name;
-        }       
+        }
+        
+        private void setState(PictureBox box, bool success)
+        {
+            if (success)
+            {
+                box.Image = global::PICOCompiler.Properties.Resources._checked;
+            }
+            else
+            {
+                box.Image = global::PICOCompiler.Properties.Resources.cancel;
+            }
+        }
+
+        public void setLeituraState(bool success)
+        {
+            setState(this.pictureBox2, success);           
+        }
+
+
+        public void setSyntaxState(bool success)
+        {
+            setState(this.pictureBox4, success);
+        }
+
+        private void _dialog_file_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void _strip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void _strip_item_new_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

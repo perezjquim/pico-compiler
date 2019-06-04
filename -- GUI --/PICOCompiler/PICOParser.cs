@@ -149,7 +149,7 @@ enum SymbolConstants : int
         private LALRParser parser;
 
         /*** MODIFICAÇÕES ***/
-        private MainForm _mainForm;
+        private PICOCompiler.MainForm _mainForm;
 
         // Lista de erros (sendo que cada erro é composto por um array de strings - posição 0 -> error_type, posição 1 -> line_number, ...)
         private LinkedList<string[]> _errorList = new LinkedList<string[]>();
@@ -159,7 +159,7 @@ enum SymbolConstants : int
         // Guarda os tipos de dados associados a cada variável declarada no ficheiro .pico processado
         private Dictionary<string, string> _declarations = new Dictionary<string,string>();
 
-        public PICOParser(MainForm mainForm, String filename) : this( filename )
+        public PICOParser(PICOCompiler.MainForm mainForm, String filename) : this( filename )
         {
             _mainForm = mainForm;
         }
@@ -238,6 +238,8 @@ enum SymbolConstants : int
             }
             catch (Exception e)
             {
+                _mainForm.setLeituraState(false);
+                _mainForm.setSyntaxState(false);
                 MessageBox.Show(e.ToString());
                 args.Continue = false;            
                 //todo: Report message to UI?
@@ -505,6 +507,8 @@ enum SymbolConstants : int
             }
             catch (Exception e)
             {
+                _mainForm.setLeituraState(false);
+                _mainForm.setSyntaxState(false);
                 MessageBox.Show(e.ToString());
                 args.Continue = false;            
                 //todo: Report message to UI?
@@ -729,7 +733,9 @@ enum SymbolConstants : int
         private void AcceptEvent(LALRParser parser, AcceptEventArgs args)
         {
             /*** MODIFICAÇÕES ***/
-            MessageBox.Show("The file has been read succesfully");
+            _mainForm.setLeituraState(true);
+            _mainForm.setSyntaxState(_errorList.Count == 0);
+            //MessageBox.Show("The file has been read succesfully");
             /*** MODIFICAÇÕES ***/
         }
 

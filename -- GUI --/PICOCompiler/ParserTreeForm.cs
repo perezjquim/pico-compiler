@@ -20,7 +20,8 @@ namespace PICOCompiler
 
         private void load(TreeNode tree)
         {
-            treeView1.Nodes.Add(tree);      
+            treeView1.Nodes.Add(tree);
+            treeView1.Nodes[0].Text = "-- Root --";
         }
     }
 }
